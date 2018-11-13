@@ -4,7 +4,7 @@
  */
 
 #include <ros.h>
-#include <std_msgs/String.h>
+#include <std_msgs/Float32.h>
 
 #include <Wire.h>
 #include <Adafruit_AMG88xx.h>
@@ -16,10 +16,10 @@ ros::NodeHandle  nh;
 
 float pixels[AMG88xx_PIXEL_ARRAY_SIZE];
 
-std_msgs::String str_msg;
+std_msgs::Float32 str_msg;
 ros::Publisher chatter("ard_chatter", &str_msg);
 
-char hello[64] = "hello world!";
+char hello;
 
 void setup()
 {
@@ -43,7 +43,7 @@ void loop()
 
   
   amg.readPixels(pixels);
-  hello[64] = pixels;
+  hello = pixels[32];
   str_msg.data = hello;
   chatter.publish( &str_msg );
   nh.spinOnce();
