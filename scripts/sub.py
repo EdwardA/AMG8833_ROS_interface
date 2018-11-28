@@ -9,7 +9,7 @@ def AMG8833_temp(data):
 	pub = rospy.Publisher('temp_chatter', Temperature, queue_size=10)
 	my_msg = Temperature()
 	my_msg.header.stamp = rospy.Time.now()
-	my_msg.header.frame_id = "temperatureID"
+	my_msg.header.frame_id = "/base_link"
 	my_msg.temperature = data.data
 	#my_msg.variance = 0
 	pub.publish(my_msg)
