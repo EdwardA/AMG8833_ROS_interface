@@ -1,8 +1,7 @@
 #!/usr/bin/env python  
-import roslib
-roslib.load_manifest('learning_tf')
+import roslib, rospy
+#roslib.load_manifest('learning_tf')
 
-import rospy
 import tf
 
 if __name__ == '__main__':
@@ -10,9 +9,10 @@ if __name__ == '__main__':
     br = tf.TransformBroadcaster()
     rate = rospy.Rate(10.0)
     while not rospy.is_shutdown():
-        br.sendTransform((0.0, 2.0, 0.0),
+        br.sendTransform((0.08633, 0.0, 0.18364),
                          (0.0, 0.0, 0.0, 1.0),
                          rospy.Time.now(),
-                         "base_link",
-                         "AMG8833")
+                         "AMG8833",
+                         "base_link")
+        rospy.loginfo(br)
         rate.sleep()
