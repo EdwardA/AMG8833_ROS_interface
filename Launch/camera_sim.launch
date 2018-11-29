@@ -6,6 +6,7 @@
 	    <param name="port" value="/dev/ttyACM0">
 	    </param>
     </node>
-	<node pkg="ard_sub" type="fixed_tf_broadcaster.py" name="AMG8833_tf" respawn="true"/>
+	<node pkg="ard_sub" type="fixed_tf_broadcaster.py" name="sensor_tf" respawn="true"/>
+	<node pkg="ard_sub" type="Moving_tf_broadcaster.py" name="Heat_point_tf" respawn="true"/>
 	<node pkg="rqt_graph" type="rqt_graph" name="rqt_graph" respawn="false"/>
 </launch>	
