@@ -1,25 +1,38 @@
 #!/usr/bin/env python2
 
-#import rospy
-import serial
-import re
-#from std_msgs.msg import Float64, Float32, Header, Time
-#from sensor_msgs.msg import Laserscan
+import rospy, serial, re, math
+#import serial
+#import re
+from std_msgs.msg import Float64, Float32, Header, Time
+from sensor_msgs.msg import LaserScan
 
 Arduino = '/dev/ttyACM0'
 Baud = 115200
-
+angle = 60
+angleRad = math.radians(angle)
+startRad = 0 - (angleRad / 2)
+endRad = angleRad / 2
 
 def serial_listen():
-    while True:
+    rospy.init_node('temp_scan', anonymous=False)
+    while not rospy.is_shutdown():
         sensor = serial.Serial(Arduino, Baud)
         x = sensor.readline()
         xshort = x[0:-2]
         split = xshort.split(",")
-        #split = split.splitlines()
-        #print x
-        #print xshort
-        print split
+        splitfirst = split[27:]
+        splitmid = splitfirst[0:-29]
+        print splitmid
+        pub = rospy.Publisher('temp_reader', LaserScan, queue_size = 10)
+        my_msg = LaserScan()
+        #my_msg.header.stamp = rospy.Time.now()
+        my_msg.header.frame_id = "Temp_Scan"
+        my_msg.angle_min = Float32(startRad)
+        my_msg.angle_max = Float32(endRad)
+        my_msg.angle_increment = Float32(angleRad / 8)
+        my_msg.scan_time = 0.1
+	    
+        #rospy.loginfo(rospy_caller_id() + 'new data', split)
         
 
 if __name__ == '__main__':
