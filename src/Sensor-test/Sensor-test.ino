@@ -4,8 +4,9 @@
 //***AMG8833 requrments***//
 Adafruit_AMG88xx amg;
 float pixels[AMG88xx_PIXEL_ARRAY_SIZE];
-float middle[7];
-  
+float middle[8];
+
+
 void setup() {
   //***AMG8833 requrments***//
   delay(100); //sensor boot
@@ -15,23 +16,23 @@ void setup() {
 
 void loop() {
   //read all the pixels
-  
-  
-
- for (int i = 0; i <=7; i++)
- {
   amg.readPixels(pixels);
-  Serial.print("pixel number = ");
-  int pixelval = 32-i;
-  Serial.println (pixelval);
-  middle[i] = pixels[pixelval];
-  Serial.print("pixel val= ");
-  Serial.println(pixels[pixelval]);
-  if (pixelval == 25){
-    Serial.println();
-  }
-  
-  delay (1000);
- }
+  float first = pixels[32];
+  float second = pixels[31];
+  float third = pixels[30];
+  float fourth = pixels[29];
+  float fith = pixels[28];
+  float sixth = pixels[27];
+  float seventh = pixels[26];
+  float eighth = pixels[25];
+  Serial.println(first);
+  Serial.println(second);
+  Serial.println(third);
+  Serial.println(fourth);
+  Serial.println(fith);
+  Serial.println(sixth);
+  Serial.println(seventh);
+  Serial.println(eighth);
+  Serial.println();
+  delay (2000);
 }
- 

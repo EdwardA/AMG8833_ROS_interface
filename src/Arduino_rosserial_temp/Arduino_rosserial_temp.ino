@@ -29,7 +29,7 @@ char frameid[] = "/AMG8833id";
 //***AMG8833 requrments***//
 Adafruit_AMG88xx amg;
 float pixels[AMG88xx_PIXEL_ARRAY_SIZE];
-float middle[7];
+float middle[8];
 
 
 void setup()
@@ -37,9 +37,17 @@ void setup()
   //***ROS requrments***//
   nh.initNode();
   nh.advertise(pub_dis);
+  bool status;
+
+  // default settings
+  status = amg.begin();
+  if (!status) {
+    //Serial.println("Could not find a valid AMG88xx sensor, check wiring!");
+    while (1);
 
   //***AMG8833 requrments***//
   delay(100); //sensor boot
+}
 }
 
 void loop()
@@ -48,11 +56,11 @@ void loop()
   amg.readPixels(pixels);
   
 
- for (int i = 0; i <=7; i++)
- {
-  int pixelval = 32-i;
-  middle[i] = pixels[pixelval];
- }
+  for (int i = 0; i <= 8; i++)
+  {
+    int pixelval = 32 - i;
+    middle[i] = pixels[pixelval];
+  }
   Temp_distance.angle_min = minimum_angle;
   Temp_distance.angle_max = max_angle;
   Temp_distance.intensities = middle;
