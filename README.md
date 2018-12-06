@@ -10,4 +10,9 @@ This program requires an arduino mega as the uno does not have sufficent memory 
 Arduino code:
 	[package]>src>Arduino_rosserial_temp
 
-the package can be launched used the camera_sim.launch file. This uses the turtlebot2 stage simulator
+the package can be launched used the camera_sim.launch file. This uses the turtlebot2 stage simulator.
+
+
+
+Limitations / future work:
+Currently, this package uses the sensor_msgs LaserScan message type, which is not apropriate message type for the ROS system. Instead, either a custom message type or pointcloud2 would be more appropriate. However, as a proof of concept this implentation allows the data to be visualised well within RVIZ.
