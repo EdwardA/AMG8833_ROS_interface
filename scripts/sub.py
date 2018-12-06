@@ -21,6 +21,7 @@ def AMG8833_temp():
     sliced_data = Laser_Scan_data.ranges[slicing]
     my_msg.ranges = sliced_data
     my_msg.intensities = temp_Scan_data.intensities
+    my_msg.header.frame_id = "camera_depth_frame"
     pub.publish(my_msg)
     rospy.loginfo(rospy.get_caller_id() + ' my_msg = %s', my_msg)
 	
