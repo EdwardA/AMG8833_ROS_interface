@@ -1,4 +1,13 @@
 # AMG8833_ROS_interface
-This repo hopes to not only connect the AMG8833 to ROS, but also publish the data onto RVIS and combine with a turtle bot for data capture.
+This repo interfaces an AMG8833 IR camera with ROS.
 
-This repo currently uses pyserial to read the data from arduino, and by removing the centre line of temperature data this can be used as intensity within a laserscan as a placeholder without a dedicated message type.
+The AMG8833 uses I2C to comunicate and so the data is read and interprreted using an Arduino MEGA and assigning the centra line of the dat to the intensity feild of a LaserScan message.
+
+This LaserScan message is then given depth data from ROS thanks to the /SCAN topic within the Turtlebot2.
+
+This program requires an arduino mega as the uno does not have sufficent memory and no other boards ahve been tested.
+
+Arduino code:
+	[package]>src>Arduino_rosserial_temp
+
+the package can be launched used the camera_sim.launch file. This uses the turtlebot2 stage simulator
